@@ -83,13 +83,9 @@ def train(net, train_iter, val_iter, test_iter, loss_fn, denormalize_fn, optimiz
             output, hidden = net(X)
             if output_model is not None:
                 y_hat = output_model(output[:, -1, :].squeeze(-1)).squeeze()
-                #y_hat = output_model(output[:, -1, :]).squeeze()
             else:
                 y_hat = output[:, -1, :].squeeze(-1)
-                #y_hat = output[:, -1, :]
-                #print(y_hat.shape)
-            #Y = torch.unsqueeze(Y,1)
-            loss = loss_fn(y_hat, Y)#input,target
+            loss = loss_fn(y_hat, Y)
             loss.backward()
             optimizer.step()
 
